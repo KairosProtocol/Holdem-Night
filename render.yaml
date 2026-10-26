@@ -1,0 +1,10 @@
+# Render blueprint: New → Blueprint in the Render dashboard, pick this repo.
+# Free instances sleep after 15 idle minutes and their disk is wiped on restart, so hand history resets.
+services:
+  - type: web
+    name: holdem-night
+    runtime: node
+    plan: free
+    buildCommand: "true"
+    startCommand: npm start
+    healthCheckPath: /

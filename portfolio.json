@@ -1,0 +1,21 @@
+{
+  "summary": "No-limit Texas Hold'em for a group of friends in the browser: pick a seat, buy in and play, with bots to fill the table. No npm dependencies, no image or sound files.",
+  "stack": ["JavaScript", "Node.js (http, node:sqlite)", "Server-Sent Events", "SVG charts", "Web Audio API", "localStorage", "Render"],
+  "howItWorks": [
+    "The server owns the game: one Table object holds every seat, the deck and the betting state, and each browser only sends actions (sit, bet, fold…).",
+    "After every change the server pushes each browser its own view over Server-Sent Events, so hole cards only ever reach the player holding them until showdown.",
+    "A browser is identified by a random id kept in localStorage, which is how one person can sit in several seats, and how a seat survives a closed tab. Each seat also gets a rejoin code for switching devices.",
+    "Every finished hand and chat message is written to SQLite, and the stats page is computed from those records.",
+    "The page re-renders on every update, so animations are keyed by when each card first appeared and resume where they were instead of restarting."
+  ],
+  "features": [
+    { "name": "Texas Hold'em rules engine", "what": "Blinds, antes, min-raises, short all-ins that don't reopen betting, side pots, split pots with odd chips, and a 7-card hand evaluator. Tested with 2,000 random hands that must not create or lose a chip.", "files": ["engine.js", "engine.test.js"] },
+    { "name": "Move clock with a time bank", "what": "10s per move plus a 60s bank that refills 5s a hand; running out checks or folds, and two timeouts in a row sits the player out.", "files": ["engine.js", "server.js"] },
+    { "name": "Votes and votekicks", "what": "Seated players vote on settings changes and kicks; bots always vote yes, and a kick waits until the player's hand is over. A password overrides settings.", "files": ["server.js"] },
+    { "name": "Test bots", "what": "A very basic bot that weighs hand strength against pot odds, used to fill seats and to fuzz-test the engine.", "files": ["bot.js"] },
+    { "name": "Stats and graphs", "what": "VPIP, PFR, aggression, showdown wins, bb/100 and decision speed per player, with net-chips, playing-style, pot-size and hand-type charts drawn as SVG with hover tooltips.", "files": ["stats.js", "public/charts.js"] },
+    { "name": "Synthesised sound packs", "what": "Card snaps, chip clinks, check knocks and win tunes generated from oscillators and filtered noise, in three styles.", "files": ["public/sound.js"] },
+    { "name": "Themes and custom backgrounds", "what": "Backgrounds, felts, card faces and backs chosen per player, plus uploaded background images shrunk in a canvas to fit in localStorage.", "files": ["public/themes.css", "public/index.html"] },
+    { "name": "Hand history viewer", "what": "Every hand replayable with board, cards that were shown, chips in and out, and how long each move took, in a dialog or a pop-out window.", "files": ["db.js", "public/index.html"] }
+  ]
+}

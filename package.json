@@ -1,0 +1,10 @@
+{
+  "name": "holdem-night",
+  "private": true,
+  "description": "Texas Hold'em for friends",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
