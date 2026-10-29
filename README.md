@@ -7,7 +7,7 @@ npm start   # http://localhost:3000 — friends on your network use http://<your
 npm test
 ```
 
-Hosted on Render from `render.yaml` (free plan: sleeps after 15 idle minutes, and hand history resets when it restarts).
+Live at https://holdem-night-wdqi.onrender.com/, hosted on Render from `render.yaml` (free plan: sleeps after 15 idle minutes, and hand history resets when it restarts).
 
 - `engine.js` — rules: blinds, betting, min-raise, side pots, showdown, hand ranking.
 - `server.js` — HTTP + Server-Sent Events; each browser only receives its own hole cards.
